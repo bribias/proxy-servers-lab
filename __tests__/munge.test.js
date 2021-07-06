@@ -944,5 +944,109 @@ describe('app routes', () => {
       expect(actual).toEqual(expectation);
     });
   
+    test('function should return munged data from yelp', async() => { 
+      const yelpData = {
+        'data' : [
+          {
+            'id': 'kViIWJFfAfWPpJOwAXBKGA',
+            'alias': 'national-september-11-memorial-museum-new-york',
+            'name': 'National September 11 Memorial Museum',
+            'image_url': 'https://s3-media2.fl.yelpcdn.com/bphoto/yoe6Wha7gQlTBNIeFO0UhQ/o.jpg',
+            'is_closed': false,
+            'url': 'https://www.yelp.com/biz/national-september-11-memorial-museum-new-york?adjust_creative=oiTfb6yARFWli9QCHW2uAQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=oiTfb6yARFWli9QCHW2uAQ',
+            'review_count': 1425,
+            'categories': [
+              {
+                'alias': 'museums',
+                'title': 'Museums'
+              }
+            ],
+            'rating': 4.5,
+            'coordinates': {
+              'latitude': 40.71143,
+              'longitude': -74.012481
+            },
+            'transactions': [],
+            'location': {
+              'address1': '180 Greenwich St',
+              'address2': '',
+              'address3': '',
+              'city': 'New York',
+              'zip_code': '10007',
+              'country': 'US',
+              'state': 'NY',
+              'display_address': [
+                '180 Greenwich St',
+                'New York, NY 10007'
+              ]
+            },
+            'phone': '+12122665211',
+            'display_phone': '(212) 266-5211',
+            'distance': 563.7632836255732
+          },
+          {
+            'id': 'vk7W3_sQwr7eZbRFsXv6rw',
+            'alias': 'taiyaki-nyc-new-york',
+            'name': 'Taiyaki NYC',
+            'image_url': 'https://s3-media2.fl.yelpcdn.com/bphoto/PMyntn0XlPvGI3pwVdsFrg/o.jpg',
+            'is_closed': false,
+            'url': 'https://www.yelp.com/biz/taiyaki-nyc-new-york?adjust_creative=oiTfb6yARFWli9QCHW2uAQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=oiTfb6yARFWli9QCHW2uAQ',
+            'review_count': 2918,
+            'categories': [
+              {
+                'alias': 'icecream',
+                'title': 'Ice Cream & Frozen Yogurt'
+              }
+            ],
+            'rating': 4.5,
+            'coordinates': {
+              'latitude': 40.71789,
+              'longitude': -73.9988
+            },
+            'transactions': [
+              'delivery'
+            ],
+            'price': '$',
+            'location': {
+              'address1': '119 Baxter St',
+              'address2': '',
+              'address3': null,
+              'city': 'New York',
+              'zip_code': '10013',
+              'country': 'US',
+              'state': 'NY',
+              'display_address': [
+                '119 Baxter St',
+                'New York, NY 10013'
+              ]
+            },
+            'phone': '+12129662882',
+            'display_phone': '(212) 966-2882',
+            'distance': 834.1635108409085
+          },
+        
+        ]
+      };
+  
+      const expected = [
+        {
+          'name': 'National September 11 Memorial Museum',
+          'image_url': 'https://s3-media2.fl.yelpcdn.com/bphoto/yoe6Wha7gQlTBNIeFO0UhQ/o.jpg',
+          'rating': 4.5,
+          'url': 'https://www.yelp.com/biz/national-september-11-memorial-museum-new-york?adjust_creative=oiTfb6yARFWli9QCHW2uAQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=oiTfb6yARFWli9QCHW2uAQ'
+        },
+        {
+          'name': 'Taiyaki NYC',
+          'image_url': 'https://s3-media2.fl.yelpcdn.com/bphoto/PMyntn0XlPvGI3pwVdsFrg/o.jpg',
+          'price': '$',
+          'rating': 4.5,
+          'url': 'https://www.yelp.com/biz/taiyaki-nyc-new-york?adjust_creative=oiTfb6yARFWli9QCHW2uAQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=oiTfb6yARFWli9QCHW2uAQ'
+        },
+      ];
+  
+      const actual = mungeYelpResponse(yelpData.data);
+  
+      expect(actual).toEqual(expected);
+    });
   });
 });
