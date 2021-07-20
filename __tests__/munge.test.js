@@ -945,7 +945,16 @@ describe('app routes', () => {
     });
   
     test('function should return munged data from yelp', async() => { 
-      const yelpData = {
+
+      const expectation = [
+        {
+          name: expect.any(String),
+          image_url: expect.any(String),
+          rating: expect.any(Number),
+          url: expect.any(String)
+        }
+      ];
+      const input = {
         'data' : [
           {
             'id': 'kViIWJFfAfWPpJOwAXBKGA',
@@ -1028,25 +1037,9 @@ describe('app routes', () => {
         ]
       };
   
-      const expected = [
-        {
-          'name': 'National September 11 Memorial Museum',
-          'image_url': 'https://s3-media2.fl.yelpcdn.com/bphoto/yoe6Wha7gQlTBNIeFO0UhQ/o.jpg',
-          'rating': 4.5,
-          'url': 'https://www.yelp.com/biz/national-september-11-memorial-museum-new-york?adjust_creative=oiTfb6yARFWli9QCHW2uAQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=oiTfb6yARFWli9QCHW2uAQ'
-        },
-        {
-          'name': 'Taiyaki NYC',
-          'image_url': 'https://s3-media2.fl.yelpcdn.com/bphoto/PMyntn0XlPvGI3pwVdsFrg/o.jpg',
-          'price': '$',
-          'rating': 4.5,
-          'url': 'https://www.yelp.com/biz/taiyaki-nyc-new-york?adjust_creative=oiTfb6yARFWli9QCHW2uAQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=oiTfb6yARFWli9QCHW2uAQ'
-        },
-      ];
+      const  actual = mungeYelpResponse(input);
   
-      const actual = mungeYelpResponse(yelpData.data);
-  
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual(expectation);
     });
   });
 });
