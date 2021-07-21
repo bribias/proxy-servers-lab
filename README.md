@@ -5,7 +5,7 @@
 1. Change all the files in the `data` directory to match the data model of your app. (If you skip this step, you will end up with bessie, jumpy, and spot at `GET /animals`.)
 1. Run `heroku create`
 1. Run `npm run setup-heroku` to create a heroku SQL database in the cloud to go with your heroku app.
-1. Run `heroku config:get DATABASE_URL` to get your heroku sql database url from the cloud.
+1. Run `heroku config:get DATABASE_URL` to get your  sql database url from the cloud.
 1. Put the database URL in your .env file, under `DATABASE_URL`. (Don't forget to changge the file name from `.env-example` to `.env`!)
 1. Run `npm run setup-db`
 1. Run `npm run start:watch` to start the dev server
